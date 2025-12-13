@@ -333,6 +333,49 @@ function wrapLeftSideImg(htmlContent) {
 
 //left-side-img
 
+//footer new logic start
+function wrapFooterBlock(htmlContent) {
+    return htmlContent.replace(/ftr-s([\s\S]*?)ftr-e/gi, function (match, content) {
+        return `
+                    </span>
+                </td>
+            </tr>
+            <tr>
+              <td style="font-family:'Roboto', Arial, Helvetica, sans-serif;font-size:12px;font-style:normal;font-weight:normal;line-height:1.5;text-align:left;color:#000000; padding-top: 34px; padding-bottom: 14px;">
+                <span style="font-family:'Roboto', Arial, Helvetica, sans-serif;font-size:12px;font-style:normal;font-weight:normal;line-height:1.5;text-align:left;color:#000000;">
+                    ${content}
+                </span>
+              </td>
+            </tr>
+            <tr>
+               <td style="font-family:'Roboto', Arial, Helvetica, sans-serif;font-size:18px;font-style:normal;font-weight:normal;line-height:1.5;text-align:left;color:#000000;padding-top: 14px; padding-bottom: 14px;">
+                  <span style="font-family:'Roboto', Arial, Helvetica, sans-serif;font-size:18px;font-style:normal;font-weight:normal;line-height:1.5;text-align:left;color:#000000;">
+        `;
+    });
+}
+
+function wrapFooterCenterBlock(htmlContent) {
+    return htmlContent.replace(/ftr-c([\s\S]*?)ftr-c-e/gi, function (match, content) {
+        return `
+                    </span>
+                </td>
+            </tr>
+            <tr>
+              <td align="center" style="font-family:'Roboto', Arial, Helvetica, sans-serif;font-size:12px;font-style:normal;font-weight:normal;line-height:1.5;text-align:center;color:#000000; padding-top: 34px; padding-bottom: 14px;">
+                <span style="font-family:'Roboto', Arial, Helvetica, sans-serif;font-size:12px;font-style:normal;font-weight:normal;line-height:1.5;text-align:center;color:#000000;">
+                    ${content}
+                </span>
+              </td>
+            </tr>
+            <tr>
+               <td style="font-family:'Roboto', Arial, Helvetica, sans-serif;font-size:18px;font-style:normal;font-weight:normal;line-height:1.5;text-align:left;color:#000000;padding-top: 14px; padding-bottom: 14px;">
+                  <span style="font-family:'Roboto', Arial, Helvetica, sans-serif;font-size:18px;font-style:normal;font-weight:normal;line-height:1.5;text-align:left;color:#000000;">
+        `;
+    });
+}
+
+//footer new logic end
+
 
 //signature-img
 function wrapSignatureImg(htmlContent) {
@@ -672,6 +715,47 @@ function wrapSignatureImgMjml(htmlContent) {
 
 //mjml-signature-img-end
 
+//mjml-footer-new-logic-start
+function wrapFooterBlockMjml(htmlContent) {
+    return htmlContent.replace(/ftr-s([\s\S]*?)ftr-e/gi, function (match, content) {
+        return `
+                       </div>
+                      </td>
+                    </tr>
+                      <tr>
+                      <td align="left" style="font-size:0px;padding:30px 25px 10px 25px;word-break:break-word;">
+                        <div style="font-family:'Roboto', Arial, Helvetica, sans-serif;font-size:12px;font-style:normal;font-weight:normal;line-height:1.5;text-align:left;color:#000000;">
+                            ${content}
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                        <div style="font-family:'Roboto', Arial, Helvetica, sans-serif;font-size:18px;font-style:normal;font-weight:normal;line-height:1.5;text-align:left;color:#000000;">
+        `;
+    });
+}
+function wrapFooterCenterBlockMjml(htmlContent) {
+    return htmlContent.replace(/ftr-c([\s\S]*?)ftr-c-e/gi, function (match, content) {
+        return `
+                       </div>
+                      </td>
+                    </tr>
+                      <tr>
+                      <td align="center" style="font-size:0px;padding:30px 25px 10px 25px;word-break:break-word;">
+                        <div style="font-family:'Roboto', Arial, Helvetica, sans-serif;font-size:12px;font-style:normal;font-weight:normal;line-height:1.5;text-align:center;color:#000000;">
+                            ${content}
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                        <div style="font-family:'Roboto', Arial, Helvetica, sans-serif;font-size:18px;font-style:normal;font-weight:normal;line-height:1.5;text-align:left;color:#000000;">
+        `;
+    });
+}
+//mjml-footer-new-logic-end
+
 
 //end mjml js code
 
@@ -837,6 +921,8 @@ function exportHTML() {
     editorContent = wrapRightSideImg(editorContent);
     editorContent = wrapLeftSideImg(editorContent);
     editorContent = wrapSignatureImg(editorContent);
+    editorContent = wrapFooterBlock(editorContent);
+    editorContent = wrapFooterCenterBlock(editorContent);
     editorContent = cleanEmptyHtmlTags(editorContent);
     editorContent = wrapContentInFullTableStructure(editorContent);
     editorContent = addOneBr(editorContent);
@@ -959,6 +1045,8 @@ function exportMJML() {
     editorContent = wrapLeftSideImgMjml(editorContent);
     editorContent = wrapRightSideImgMjml(editorContent);
     editorContent = wrapSignatureImgMjml(editorContent);
+    editorContent = wrapFooterBlockMjml(editorContent);
+    editorContent = wrapFooterCenterBlockMjml(editorContent);
     editorContent = cleanEmptyHtmlTags(editorContent);
     editorContent = wrapContentInFullMjmlTableStructure(editorContent);
     editorContent = addOneBr(editorContent);
